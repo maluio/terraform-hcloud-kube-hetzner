@@ -400,6 +400,19 @@ variable "autoscaler_disable_ipv6" {
   default     = false
 }
 
+variable "enable_tailscale" {
+  type        = bool
+  default     = false
+  description = "Whether or not to enable Tailscale."
+}
+
+variable "tailscale_auth_key" {
+  type        = string
+  default     = ""
+  description = "Tailscale auth key."
+  sensitive   = true
+}
+
 variable "hetzner_ccm_version" {
   type        = string
   default     = null
