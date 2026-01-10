@@ -406,7 +406,7 @@ variable "enable_tailscale" {
   description = "Whether or not to enable Tailscale."
 }
 
-variable "tailscale_auth_key" {
+variable "tailscale_auth_key_k8s_node_remote" {
   type        = string
   default     = ""
   description = "Tailscale auth key."

@@ -1265,11 +1265,10 @@ cloudinit_runcmd_common = <<EOT
 # Cleanup some logs
 - [truncate, '-s', '0', '/var/log/audit/audit.log']
 
-# Install Tailscale if enabled
-%{if var.enable_tailscale}
-- [sh, -c, "if ! command -v tailscale >/dev/null 2>&1; then curl -fsSL https://tailscale.com/install.sh | sh; fi"]
+# Start Tailscale if enabled (binary pre-installed in MicroOS snapshot)
+%{if var.enable_tailscale && var.tailscale_auth_key_k8s_node_remote != ""}
 - [systemctl, enable, --now, tailscaled]
-- [sh, -c, "tailscale up --authkey=${var.tailscale_auth_key} --accept-dns=false"]
+- [sh, -c, "tailscale up --authkey=${var.tailscale_auth_key_k8s_node_remote} --accept-dns=false"]
 %{endif}
 
 # Add logic to truly disable SELinux if disable_selinux = true.
